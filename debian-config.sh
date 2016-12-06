@@ -6,5 +6,4 @@
 sudo apt-get update && sudo apt-get dist-upgrade
 echo "Sélection de l'encodage de la langue: "
 sudo dpkg-reconfigure locales
-sudo apt-get install manpages-fr manpages-fr-dev manpages-fr-extra
-sudo apt-get install man-db
+sudo apt-get install manpages-fr manpages-fr-dev manpages-fr-extra man-db tree
