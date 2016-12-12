@@ -6,4 +6,7 @@
 sudo apt-get update && sudo apt-get dist-upgrade
 echo "Sélection de l'encodage de la langue: "
 sudo dpkg-reconfigure locales
-sudo apt-get install manpages-fr manpages-fr-dev manpages-fr-extra man-db tree git dnsutils
+#Installation de quelques paquets essentiels
+#Il ne s'agit plus simplement d'installer les paquets pour un environnement configuré en français,
+#mais aussi des paquets utiles au quotidien et dont l'installation manuelle est, en générale, contre-productive.
+sudo apt-get install manpages-fr manpages-fr-dev manpages-fr-extra man-db tree git dnsutils bzip2
