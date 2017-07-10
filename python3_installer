@@ -1,0 +1,16 @@
+#!/bin/bash
+
+install_python3()
+{
+    if [ -z "$(which python3)" ]
+    then
+      echo "Installation de Python 3.6.1..."
+      wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz
+      tar xvzf Python-3.6.1.tgz
+      cd Python-3.6.1/
+      ./configure && make && make test; make install
+      which python3
+    else
+      echo 'python3 est déjà installé.'
+    fi
+}
