@@ -1,0 +1,83 @@
+#!/bin/bash
+
+install_java()
+{
+    echo "Installation de java..."
+    # L'url de l'archive à télécharger.
+    local java_url="$1"
+    # Le nom du répertoire qui va être extrait de l'archive.
+    local directory_name="$2"
+    wget -O JDK.tar.gz "${java_url}"
+    tar xvzf JDK.tar.gz
+    cd "${directory_name}"
+    local JAVA_BINARIES="${PWD}/bin"
+    local JAVA_HOME="${JAVA_BINARIES}/java"
+
+    # Vérifie si un groupe d'alternatives existe pour chaque
+    # exécutable essentiel.
+    # Si ce n'est pas le cas, l'installateur en créera un lui-même
+    # pour lier les exécutables se trouvant dans l'archive téléchargée.
+
+    if [ -z "$(which java)" ]
+    then
+        update-alternatives --install /usr/bin/java java "${JAVA_HOME}" 1
+    else
+        echo "Java est déjà installé sur cette machine, les alternatives vont être modifiées."
+        update-alternatives --list java > java_alternatives_number
+        local alternatives="$(wc -l < java_alternatives_number)"
+        update-alternatives --install /usr/bin/java java "${JAVA_HOME}" $((alternatives + 1))
+        rm -v java_alternatives_number
+    fi
+    local JAVAC_HOME="${JAVA_BINARIES}/javac"
+    if [ -z "$(which javac)" ]
+    then
+        update-alternatives --install /usr/bin/javac javac "${JAVAC_HOME}" 1
+    else
+        echo "Un compilateur java est déjà installé sur cette machine, les alternatives vont être modifiées."
+        update-alternatives --list java > javac_alternatives_number
+        local alternatives="$(wc -l < javac_alternatives_number)"
+        update-alternatives --install /usr/bin/javac javac "${JAVAC_HOME}" $((alternatives + 1))
+        rm -v javac_alternatives_number
+    fi
+    local JAVAP_HOME="${JAVA_BINARIES}/javap"
+    if [ -z "$(which javap)" ]
+    then
+        update-alternatives --install /usr/bin/javap javap "${JAVAP_HOME}" 1
+    else
+        echo "Un décompilateur java est déjà installé sur cette machine, les alternatives vont être modifiées."
+        update-alternatives --list java > javap_alternatives_number
+        local alternatives="$(wc -l < javap_alternatives_number)"
+        update-alternatives --install /usr/bin/javap javap "${JAVAP_HOME}" $((alternatives + 1))
+        rm -v javap_alternatives_number
+    fi
+    local JAVADOC_HOME="${JAVA_BINARIES}/javadoc"
+    if [ -z "$(which javadoc)" ]
+    then
+        update-alternatives --install /usr/bin/javadoc javadoc "${JAVADOC_HOME}" 1
+    else
+        echo "Un moteur de javadoc est déjà installé sur cette machine, les alternatives vont être modifiées."
+        update-alternatives --list java > javadoc_alternatives_number
+        local alternatives="$(wc -l < javadoc_alternatives_number)"
+        update-alternatives --install /usr/bin/javadoc javadoc "${JAVADOC_HOME}" $((alternatives + 1))
+        rm -v javadoc_alternatives_number
+    fi
+    local JAR_HOME="${JAVA_BINARIES}/jar"
+    if [ -z "$(which jar)" ]
+    then
+        update-alternatives --install /usr/bin/jar jar "${JAR_HOME}" 1
+    else
+        echo "Un générateur d'archives jar est déjà installé sur cette machine, les alternatives vont être modifiées."
+        update-alternatives --list java > jar_alternatives_number
+        local alternatives="$(wc -l < jar_alternatives_number)"
+        update-alternatives --install /usr/bin/jar jar "${JAR_HOME}" $((alternatives + 1))
+    fi
+    echo "Vérification des liens symboliques:"
+    echo \
+    "
+    java:$(which java)
+    javac:$(which javac)
+    javap:$(which javap)
+    javadoc:$(which javadoc)
+    jar:$(which jar)
+    "
+}
