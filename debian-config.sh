@@ -8,7 +8,7 @@
 if [ "$(whoami)" != 'root' ]
 then
     echo "You're not logged in as user root. Please run this script with root."
-    exit 0
+    exit 1
 fi
 apt-get update && apt-get dist-upgrade
 if [ "$LANG" != "fr_FR.UTF-8" ]
