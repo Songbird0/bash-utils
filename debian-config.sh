@@ -21,7 +21,7 @@ fi
 # Installation de quelques paquets essentiels
 # Il ne s'agit plus simplement d'installer les paquets pour un environnement configuré en français,
 # mais aussi des paquets utiles au quotidien et dont l'installation manuelle est, en générale, contre-productive.
-apt-get install manpages-fr manpages-fr-dev manpages-fr-extra man-db tree git dnsutils bzip2 gcc g++ make curl software-properties-common
+apt-get install --assume-yes manpages-fr manpages-fr-dev manpages-fr-extra man-db tree git dnsutils bzip2 gcc g++ make curl software-properties-common
 ( install_python3 )
 
 # Les arguments peuvent être modifiés au besoin
