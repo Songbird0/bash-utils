@@ -10,7 +10,7 @@ then
     echo "You're not logged in as user root. Please run this script with root."
     exit 1
 fi
-apt-get update && apt-get dist-upgrade
+apt-get update && apt-get -y dist-upgrade
 if [ "$LANG" != "fr_FR.UTF-8" ]
 then
     echo "Sélection de l'encodage de la langue: "
@@ -21,7 +21,7 @@ fi
 # Installation de quelques paquets essentiels
 # Il ne s'agit plus simplement d'installer les paquets pour un environnement configuré en français,
 # mais aussi des paquets utiles au quotidien et dont l'installation manuelle est, en générale, contre-productive.
-apt-get install --assume-yes manpages-fr manpages-fr-dev manpages-fr-extra man-db tree git dnsutils bzip2 gcc g++ make curl software-properties-common
+apt-get -y install manpages-fr manpages-fr-dev manpages-fr-extra man-db tree git dnsutils bzip2 gcc g++ make curl software-properties-common
 ( install_python3 )
 
 # Les arguments peuvent être modifiés au besoin
